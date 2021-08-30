@@ -11,26 +11,26 @@ function App() {
   const [timerMinute, setTimerMinute] = useState(25);
   const [isPlay, setIsPlay] = useState(false);
 
-  onPlayChange(isPlay) {
+  const onPlayChange = (isPlay) => {
     setIsPlay(isPlay);
   }
 
-  onBreakIntervalChange(newBreakLength) {
+  const onBreakIntervalChange = (newBreakLength) =>{
     setBreakInterval(newBreakLength);
   }
 
-  onSessionIntervalChange(newSessionLength) {
+  const onSessionIntervalChange = (newSessionLength) =>{
     setSessionInterval(newSessionLength);
     setTimerMinute(newSessionLength);
 
   }
 
-  onTimerMinuteChange(minuteChange) {
+  const onTimerMinuteChange = (minuteChange) => {
     setTimerMinute(minuteChange);
     
   }
 
-  onResetTimer() {
+  const onResetTimer = () => {
     setSessionInterval(25);
     setTimerMinute(25);
     setBreakInterval(5);

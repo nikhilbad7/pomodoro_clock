@@ -1,12 +1,12 @@
 import { useState } from 'react';
 
-const Timer = () => {
+const Timer = (props) => {
 
     const [timerSeconds, setTimerSeconds] = useState(0);
     const [intervalId, setIntervalId] = useState('');
     const [isSessionInterval, setIsSessionInterval] = useState(true);
   
-    playStopTimer(event) {
+    const playStopTimer = (event) => {
     const action = event.target.dataset.type;
 
     switch (action) {
@@ -23,7 +23,7 @@ const Timer = () => {
     }
   }
 
-    decreaseTimer() {
+    const decreaseTimer = () => {
     let intervalId = setInterval(() => {
       switch(timerSeconds) {
         case 0:
@@ -53,7 +53,7 @@ const Timer = () => {
     
   }
 
-  resetTimer() {
+  const resetTimer = () => {
     clearInterval(intervalId);
 
     props.resetTimer();
