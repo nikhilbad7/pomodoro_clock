@@ -24,12 +24,12 @@ function BreakInterval(props) {
         disabled = {props.isPlay ? "disabled" : ""}
         onClick = {decreaseCounter}
         className='counter-btn'
-        >Down</button>
+        >-</button>
         <p className="break-time">{props.breakInterval}</p>
         <button
         disabled = {props.isPlay ? "disabled" : ""}
         onClick = {increaseCounter}
-        className="counter-btn">Up</button>
+        className="counter-btn">+</button>
       </section>
     </section>
   )

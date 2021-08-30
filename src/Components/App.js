@@ -3,15 +3,15 @@ import '../ComponentStyles/App.css';
 import BreakInterval from './BreakInterval';
 import SessionInterval from './SessionInterval';
 import Timer from './Timer';
+import Cycle from './Cycle';
 
-function App() {
-    
 
+function App () {
   const [breakInterval, setBreakInterval] = useState(5);
   const [sessionInterval, setSessionInterval] = useState(25);
   const [timerMinute, setTimerMinute] = useState(25);
   const [isPlay, setIsPlay] = useState(false);
-
+  const [cycle, setCycle] = useState(1);
 
   const onPlayChange = (isPlay) =>{
     setIsPlay(isPlay);
@@ -34,9 +34,12 @@ function App() {
     setSessionInterval(25);
     setTimerMinute(25);
     setBreakInterval(5);
-  } 
+  }
 
-  
+  const cycleHandler = (num) =>{
+    setCycle(num);
+  }
+
     return (
       <main className="App">
         <section>
@@ -52,6 +55,7 @@ function App() {
             isPlay = {isPlay}
             />
           </section>
+          <Cycle numOfCycles={cycleHandler}/>
           <Timer
           sessionInterval = {sessionInterval}
           timerMinute = {timerMinute}
@@ -59,11 +63,12 @@ function App() {
           breakInterval = {breakInterval}
           onPlayChange = {onPlayChange}
           resetTimer = {onResetTimer}
+          numcycle= { cycle }
           />
         </section>
       </main>
     )
-  }
-
+  
+}
 
 export default App;

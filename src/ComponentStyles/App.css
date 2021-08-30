@@ -13,16 +13,18 @@ main {
 }
 
 .app-title {
-  font-size: 4rem;
+  font-size: 3rem;
   font-weight: 400;
   letter-spacing: 2px;
   color: #263646;
   margin-bottom: 0;
+  font-weight: bold;
+
 }
 
 .App {
   display: flex;
-  height: 80vh;
+  height: 95vh;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -43,6 +45,7 @@ main {
   cursor: pointer;
   width: 55px;
   text-align: center;
+  font-size: 1rem;
 }
 
 .counter-btn:disabled {

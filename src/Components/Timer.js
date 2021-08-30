@@ -1,72 +1,101 @@
-import  { useState } from 'react';
+import React from 'react';
 import '../ComponentStyles/SessionActions.css';
 import '../ComponentStyles/Timer.css';
 
-const Timer = (props) => {
-  
-    const [timerSeconds, setTimerSeconds] = useState(0);
-    const [intervalId, setIntervalId] = useState('');
-    const [isSessionInterval, setIsSessionInterval] = useState(true);
+class Timer extends React.Component {
+  constructor() {
+    super()
 
-   
+    this.state = {
+      timerSeconds: 0,
+      intervalId: '',
+      isSessionInterval: true,
+      cycle: 0
+    }
 
-  const playStopTimer = (event) => {
+    this.playStopTimer = this.playStopTimer.bind(this);
+    this.resetTimer = this.resetTimer.bind(this);
+  }
+
+  playStopTimer(event) {
     const action = event.target.dataset.type;
 
     switch (action) {
       case 'play':
-        props.onPlayChange(true);
-        decreaseTimer();
+        this.props.onPlayChange(true);
+        this.decreaseTimer();
         break;
       case 'stop':
-        props.onPlayChange(false);
-        clearInterval(intervalId);
+        this.props.onPlayChange(false);
+        clearInterval(this.state.intervalId);
         break;
       default:
         break;
     }
   }
 
-  const decreaseTimer = () => {
-    let intervalId = setInterval(() => {
-      switch(timerSeconds) {
+  decreaseTimer() {
+    //var n=1;
+    var intervalId = setInterval(() => {
+      switch(this.state.timerSeconds) {
         case 0:
-          if (props.timerMinute === 0) {
-            if (isSessionInterval) {
+          if (this.props.timerMinute === 0) {
+            if (this.state.isSessionInterval) {
               // start break timer
-              setIsSessionInterval(false);
-              props.onTimerMinuteChange(props.breakInterval);
-            } 
-            else {
+              this.setState({
+                isSessionInterval: false
+              })
+
+              this.props.onTimerMinuteChange(this.props.breakInterval);
+            } else {
               // start session timer
-              setIsSessionInterval(true);
-              props.onTimerMinuteChange(props.sessionInterval);
+              this.setState({
+                isSessionInterval: true,
+                cycle: this.state.cycle+1
+
+              })
+              if(this.state.cycle===this.props.numcycle){
+                    clearInterval(this.state.intervalId);
+                }
+
+              this.props.onTimerMinuteChange(this.props.sessionInterval);
             }
+          } else {
+            this.props.onTimerMinuteChange(this.props.timerMinute - 1);
+            this.setState({
+              timerSeconds: 59
+
+            })
           }
-           else {
-              props.onTimerMinuteChange(props.timerMinute - 1);
-              setTimerSeconds(59);
-            }
           break;
         default:
-        setTimerSeconds(timerSeconds-1);
+        this.setState({
+          timerSeconds: this.state.timerSeconds - 1
+        })
           break;
       }
-    }, 1000);
+    }, 100);
 
-    setIntervalId(intervalId);
+    this.setState({
+      intervalId: intervalId
+    });
+
+    
+    
   }
 
-  const resetTimer = () => {
-    clearInterval(intervalId);
+  resetTimer() {
+    clearInterval(this.state.intervalId);
 
-    props.resetTimer();
-    props.onPlayChange(false);
+    this.props.resetTimer();
+    this.props.onPlayChange(false);
 
-    setTimerSeconds(0);
+    this.setState({
+      timerSeconds: 0
+    })
   }
 
-  
+  render() {
     let timerClass = this.props.timerMinute === 0 ? "timer-alert" : "";
     timerClass += " session-timer";
     return (
@@ -89,7 +118,7 @@ const Timer = (props) => {
         </section>
       </section>
     )
-  
+  }
 }
 
 export default Timer;
