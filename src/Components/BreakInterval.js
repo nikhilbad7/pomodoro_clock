@@ -1,5 +1,17 @@
 function BreakInterval(props) {
-  
+  function increaseCounter() {
+    props.onBreakIntervalChange(props.breakInterval + 1);
+  }
+
+  function decreaseCounter() {
+    const currentInterval = props.breakInterval;
+
+    if (currentInterval === 0) {
+      return;
+    }
+
+    props.onBreakIntervalChange(currentInterval - 1);
+  }
 
   return (
     <section >
