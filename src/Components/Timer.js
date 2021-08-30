@@ -74,7 +74,7 @@ class Timer extends React.Component {
         })
           break;
       }
-    }, 1000);
+    },1000);
 
     this.setState({
       intervalId: intervalId
