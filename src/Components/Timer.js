@@ -6,8 +6,53 @@ const Timer = () => {
     const [intervalId, setIntervalId] = useState('');
     const [isSessionInterval, setIsSessionInterval] = useState(true);
   
+    playStopTimer(event) {
+    const action = event.target.dataset.type;
+
+    switch (action) {
+      case 'play':
+        props.onPlayChange(true);
+        decreaseTimer();
+        break;
+      case 'stop':
+        props.onPlayChange(false);
+        clearInterval(intervalId);
+        break;
+      default:
+        break;
+    }
+  }
+
+    decreaseTimer() {
+    let intervalId = setInterval(() => {
+      switch(timerSeconds) {
+        case 0:
+          if (props.timerMinute === 0) {
+            if (isSessionInterval) {
+              // start break timer
+              setIsSessionInterval(false);
+              
+              props.onTimerMinuteChange(props.breakInterval);
+            } else {
+              // start session timer
+              setIsSessionInterval(true);
+              props.onTimerMinuteChange(props.sessionInterval);
+            }
+          } else {
+            props.onTimerMinuteChange(props.timerMinute - 1);
+            setTimerSeconds(59);
+            }
+          break;
+        default:
+        setTimerSeconds(timerSeconds-1);
+          break;
+      }
+    }, 1000);
+
+    setIntervalId(intervalId);
     
-  render() {
+  }
+  
     return (
       <section>
         <section id="session-container">
@@ -28,7 +73,7 @@ const Timer = () => {
         </section>
       </section>
     )
-  }
+  
 }
 
 export default Timer;
