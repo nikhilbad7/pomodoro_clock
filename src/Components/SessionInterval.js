@@ -1,4 +1,8 @@
+import React from 'react';
+import '../ComponentStyles/SessionInterval.css';
+
 function SessionInterval(props) {
+
   function increaseCounter() {
     const currentInterval = props.sessionInterval;
 

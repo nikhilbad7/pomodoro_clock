@@ -1,12 +1,16 @@
-import { useState } from 'react';
+import  { useState } from 'react';
+import '../ComponentStyles/SessionActions.css';
+import '../ComponentStyles/Timer.css';
 
 const Timer = (props) => {
-
+  
     const [timerSeconds, setTimerSeconds] = useState(0);
     const [intervalId, setIntervalId] = useState('');
     const [isSessionInterval, setIsSessionInterval] = useState(true);
-  
-    const playStopTimer = (event) => {
+
+   
+
+  const playStopTimer = (event) => {
     const action = event.target.dataset.type;
 
     switch (action) {
@@ -23,7 +27,7 @@ const Timer = (props) => {
     }
   }
 
-    const decreaseTimer = () => {
+  const decreaseTimer = () => {
     let intervalId = setInterval(() => {
       switch(timerSeconds) {
         case 0:
@@ -31,16 +35,17 @@ const Timer = (props) => {
             if (isSessionInterval) {
               // start break timer
               setIsSessionInterval(false);
-              
               props.onTimerMinuteChange(props.breakInterval);
-            } else {
+            } 
+            else {
               // start session timer
               setIsSessionInterval(true);
               props.onTimerMinuteChange(props.sessionInterval);
             }
-          } else {
-            props.onTimerMinuteChange(props.timerMinute - 1);
-            setTimerSeconds(59);
+          }
+           else {
+              props.onTimerMinuteChange(props.timerMinute - 1);
+              setTimerSeconds(59);
             }
           break;
         default:
@@ -50,7 +55,6 @@ const Timer = (props) => {
     }, 1000);
 
     setIntervalId(intervalId);
-    
   }
 
   const resetTimer = () => {
@@ -60,29 +64,28 @@ const Timer = (props) => {
     props.onPlayChange(false);
 
     setTimerSeconds(0);
-    
   }
-  
-    let timerClass = props.timerMinute === 0 ? "timer-alert" : "";
-    timerClass += " session-timer";
 
+  
+    let timerClass = this.props.timerMinute === 0 ? "timer-alert" : "";
+    timerClass += " session-timer";
     return (
       <section>
         <section id="session-container">
-          <h4 className="session-header">{isSessionInterval ? 'Session' : 'Break'}</h4>
+          <h4 className="session-header">{this.state.isSessionInterval ? 'Session' : 'Break'}</h4>
           <span
           className={timerClass}>
-          {props.timerMinute}</span>
+          {this.props.timerMinute}</span>
           <span
           className={timerClass}
           id="colon">:</span>
           <span
-          className={timerClass}>{timerSeconds === 0 ? '00' : timerSeconds < 10 ? '0' + timerSeconds : timerSeconds}</span>
+          className={timerClass}>{this.state.timerSeconds === 0 ? '00' : this.state.timerSeconds < 10 ? '0' + this.state.timerSeconds : this.state.timerSeconds}</span>
         </section>
         <section id="actions-container">
-          <button data-type="play" onClick = {playStopTimer}>Play</button>
-          <button data-type="stop" onClick = {playStopTimer}>Stop</button>
-          <button onClick = {resetTimer}>Refresh</button>
+          <button data-type="play" onClick = {this.playStopTimer}>Play</button>
+          <button data-type="stop" onClick = {this.playStopTimer}>Stop</button>
+          <button onClick = {this.resetTimer}>Refresh</button>
         </section>
       </section>
     )

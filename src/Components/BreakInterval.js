@@ -1,3 +1,6 @@
+import React from 'react';
+import '../ComponentStyles/BreakInterval.css';
+
 function BreakInterval(props) {
   function increaseCounter() {
     props.onBreakIntervalChange(props.breakInterval + 1);
