@@ -14,15 +14,15 @@ function BreakInterval(props) {
   }
 
   return (
-    <section >
+    <section id="break-interval-container">
       <h4>Break Length</h4>
-      <section>
+      <section id="break-time-interval">
         <button
         disabled = {props.isPlay ? "disabled" : ""}
         onClick = {decreaseCounter}
         className='counter-btn'
         >Down</button>
-        <p>{props.breakInterval}</p>
+        <p className="break-time">{props.breakInterval}</p>
         <button
         disabled = {props.isPlay ? "disabled" : ""}
         onClick = {increaseCounter}

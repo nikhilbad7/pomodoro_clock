@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import '../ComponentStyles/App.css';
 import BreakInterval from './BreakInterval';
 import SessionInterval from './SessionInterval';
 import Timer from './Timer';
@@ -38,8 +39,8 @@ function App() {
   return (
     <main className="App">
       <section>
-        <h2>Pomodoro Clock</h2>
-        <section>
+        <h2 className="app-title">Pomodoro Clock</h2>
+        <section id="interval-container">
           <BreakInterval 
             onBreakIntervalChange = {onBreakIntervalChange}
             breakInterval = {breakInterval}

@@ -72,7 +72,7 @@ const Timer = () => {
           <h4 className="session-header">{isSessionInterval ? 'Session' : 'Break'}</h4>
           <span
           className={timerClass}>
-          {this.props.timerMinute}</span>
+          {props.timerMinute}</span>
           <span
           className={timerClass}
           id="colon">:</span>

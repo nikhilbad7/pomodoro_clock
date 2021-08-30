@@ -19,14 +19,14 @@ function SessionInterval(props) {
   }
 
   return (
-    <section >
+    <section id="session-interval-container">
       <h4>Session Length</h4>
-      <section>
+      <section id="session-interval">
         <button
         disabled = {props.isPlay ? "disabled" : ""}
         onClick = {decreaseCounter}
         className="counter-btn">Down</button>
-        <p>{props.sessionInterval}</p>
+        <p className="session-time">{props.sessionInterval}</p>
         <button
         disabled = {props.isPlay ? "disabled" : ""}
         onClick = {increaseCounter}
